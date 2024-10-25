@@ -6,7 +6,7 @@ window.onload = async function() {
     for (const pokemon of pokemons) {
         const listElement = document.createElement("li");
         listElement.textContent = pokemon.name;
-        listElement.addEventListener("click", () => togglePokemonDetails(pokemon.url, listElement));
+        listElement.addEventListener("click", () => PokemonInfo(pokemon.url, listElement));
         ulKanto.appendChild(listElement);
     }
 }
@@ -18,14 +18,15 @@ async function getKantoPokemon() {
     return pokemonArray;
 }
 
-async function togglePokemonDetails(url, listElement) {
+async function PokemonInfo(url, listElement) {
     const existingDetails = listElement.querySelector("div");
     
     if (existingDetails) {
-        // If details are already displayed, remove them
+        /* Si l'informacio ya esta oberta i li dono click una altra
+         vegada es tanca l'informació i torna a l'estat original de la lista*/
         listElement.removeChild(existingDetails);
     } else {
-        // If details are not displayed, fetch and display them
+        //Si l'informacio no esta mostrada, la crido
         const response = await fetch(url);
         const pokemon = await response.json();
         
@@ -33,23 +34,28 @@ async function togglePokemonDetails(url, listElement) {
         detailsDiv.innerHTML = `
             <h2>${pokemon.name}</h2>
             <p>ID: ${pokemon.id}</p>
-            <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}">
+            <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}" class="pokemon-image">
             <p>Types: ${pokemon.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
             <button class="add-to-team">Añadir a equipo</button>
         `;
         
         listElement.appendChild(detailsDiv);
 
-        // Add event listener to the "Añadir a equipo" button
+        // Faig un event listener al botó perque faci una crida a la funció addToTeam
         const addToTeamButton = detailsDiv.querySelector(".add-to-team");
         addToTeamButton.addEventListener("click", () => addToTeam(pokemon));
     }
 }
 
 function addToTeam(pokemon) {
-    
     const teamList = document.getElementById("team");
-    // Create the Pokémon details block
+    if (teamList.children.length >= 6) {
+        alert("El equipo ya tiene 6 Pokémon.");
+        return;
+    }
+
+  
+    //Creo un nuevo elemento
     const pokemonBlock = document.createElement("li");
     pokemonBlock.innerHTML = `
         <h2>${pokemon.name}</h2>
@@ -57,7 +63,6 @@ function addToTeam(pokemon) {
         <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}" class="pokemon-image">
         <p>Types: ${pokemon.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
     `;
-
-    // Append the Pokémon details block to the team list
+    //Añado el nuevo elemento a la lista
     document.getElementById("team").appendChild(pokemonBlock);
 }

@@ -1,3 +1,19 @@
+header{
+    border-color: blue;
+    color: yellow;
+    text-shadow: 
+        -5px -5px 0 #002678,  
+        5px -5px 0 #002678,
+        -5px 5px 0 #002678,
+        5px 5px 0 #002678;
+}
+header h1{
+    font-size: 50px;
+    font-weight: bold;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+   
+}
+
 body{
 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
