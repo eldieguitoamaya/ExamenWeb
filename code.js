@@ -87,7 +87,7 @@ function onSearchPokemon(form) {
             <p>Types: ${pokemon.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
             <button class="add-to-team">Añadir a equipo</button>
         `;
-        document.getElementById("searched-pokemon-list").appendChild(liSearchPokemonInfo);
+        document.getElementById("searched-pokemon-info").appendChild(liSearchPokemonInfo);
         // Faig un event listener al botó perque faci una crida a la funció addToTeam
         const addToTeamButton = liSearchPokemonInfo.querySelector(".add-to-team");
         addToTeamButton.addEventListener("click", () => addToTeam(pokemon)); 
