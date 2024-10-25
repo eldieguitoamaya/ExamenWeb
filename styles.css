@@ -17,6 +17,12 @@ header h1{
 body{
 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+form{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 0 auto;
+}
 #kanto-list li {
     list-style: none;
     margin-right: 1em;

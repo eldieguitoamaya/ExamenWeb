@@ -66,3 +66,10 @@ function addToTeam(pokemon) {
     //Añado el nuevo elemento a la lista
     document.getElementById("team").appendChild(pokemonBlock);
 }
+
+function onSearchPokemon(form){
+    const formElements = form.elements; 
+    const searchFormElement= formElements.search//busco el input
+    const pokemonName = searchFormElement.value.toLowerCase();//obtengo el valor del input
+    
+}
