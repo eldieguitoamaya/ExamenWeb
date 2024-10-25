@@ -5,17 +5,14 @@ window.onload = async function(){
     for (const pokemon of pokemons){
         const listElement = document.createElement("li");
         listElement.textContent = pokemon.name;
-        ulKanto.appendChild(li);
+        ulKanto.appendChild(listElement);
     }
 
 }
 async function getKantoPokemon(){
-   
-    for( let i = 1; i <= 151; i++){
-        const response = await fetch (`${BASE_URL}pokemon/?limit=151`);
-        const jsonresponse = await response.json();
-        const pokemonArray = jsonresponse.results;
-        return pokemonArray;
-    }
+    const response = await fetch (`${BASE_URL}pokemon/?limit=151`);
+    const jsonresponse = await response.json();
+    const pokemonArray = jsonresponse.results;
+    return pokemonArray;
     
 }
