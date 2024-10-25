@@ -23,6 +23,22 @@ form{
     width: 25%;
     margin: 0 auto;
 }
+#searched-pokemon-info{
+    background-color: lightgray;
+    padding: 1rem;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#searched-pokemon-info li{
+    list-style: none;
+    margin-right: 1em;
+    padding: 1rem;
+    border: 1px solid black;
+    background-color: rgb(199, 193, 193);
+    border-radius: 1px;
+}
 #kanto-list li {
     list-style: none;
     margin-right: 1em;
