@@ -79,17 +79,17 @@ function onSearchPokemon(form) {
             return;
         }
         globalPokemon[pokemon.url] = pokemon;
-        const divSearchPokemonInfo = document.getElementById("searched-pokemon-info");
-        divSearchPokemonInfo.innerHTML = `
+        const liSearchPokemonInfo = document.createElement("li");
+        liSearchPokemonInfo.innerHTML = `
             <h2>${pokemon.name}</h2>
             <p>ID: ${pokemon.id}</p>
             <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}" class="pokemon-image">
             <p>Types: ${pokemon.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
             <button class="add-to-team">Añadir a equipo</button>
         `;
-
+        document.getElementById("searched-pokemon-list").appendChild(liSearchPokemonInfo);
         // Faig un event listener al botó perque faci una crida a la funció addToTeam
-        const addToTeamButton = divSearchPokemonInfo.querySelector(".add-to-team");
+        const addToTeamButton = liSearchPokemonInfo.querySelector(".add-to-team");
         addToTeamButton.addEventListener("click", () => addToTeam(pokemon)); 
     });
     return false;
