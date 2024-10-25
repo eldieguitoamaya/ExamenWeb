@@ -1,8 +1,7 @@
-ul{
-    display: flex;
-    flex-wrap: wrap;
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-ul li{
+#kanto-list li{
     list-style: none;
     margin-right:1em;
     padding: 1rem;
@@ -12,4 +11,6 @@ ul li{
 }
 #kanto-list{
     background-color: aqua;
+    display: flex;
+    flex-wrap: wrap;
 }
