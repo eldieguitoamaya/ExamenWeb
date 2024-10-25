@@ -1,28 +1,23 @@
 <!DOCTYPE html>
-<html lang = "en"></html>
-
+<html lang="en">
 <head>
     <title>PokeApi</title>
-    <meta charset = "UTF-8">
-    <script src = "code.js"></script>
+    <meta charset="UTF-8">
+    <script src="code.js" defer></script>
     <link rel="stylesheet" href="styles.css">
-
 </head>
-
 <body>
-    
     <header>
-        <h1>POKEMON API</h1>
+        <h1 class="header-text">Pokemon API</h1>
     </header>
     <form onsubmit="return onSearchPokemon(this)">
-        <input type="text" id="search" placeholder="busca un pokemon">
+        <input type="text" name="search" placeholder="Buscar Pokémon">
         <button type="submit">Buscar</button>
     </form>
+    <div id="searched-pokemon-info"></div>
     <h2>Equipo</h2>
     <ul id="team"></ul>
-    <h2>Pokemon de Kanto</h2>
-    <ul id="kanto-list">
-    </ul>
+    <ul id="kanto-list"></ul>
+    
 </body>
-
 </html>

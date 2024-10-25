@@ -67,28 +67,62 @@ function addToTeam(pokemon) {
     document.getElementById("team").appendChild(pokemonBlock);
 }
 
-const globalPokemon = {};//Lo uso para usar clave valor, donde clave sera la url y valor el pokemon
-function onSearchPokemon(form){
+const globalPokemon = {}; // Lo uso para usar clave valor, donde clave sera la url y valor el pokemon
+
+function onSearchPokemon(form) {
     const formElements = form.elements; 
-    const searchFormElement= formElements.search//busco el input
-    const pokemonName = searchFormElement.value;//obtengo el valor del input
-    searchPokemon(pokemonName).then(async(pokemon) =>{
-        if(!pokemon){
+    const searchFormElement = formElements.search; // busco el input
+    const pokemonName = searchFormElement.value.toLowerCase(); // obtengo el valor del input y lo convierto a minúsculas
+    searchPokemon(pokemonName).then(async (pokemon) => {
+        if (!pokemon) {
             alert("Pokemon no encontrado");
             return;
         }
         globalPokemon[pokemon.url] = pokemon;
-        const divSearchPokemonInfo = document.createElementById("searched-pokemon-info");
+        const divSearchPokemonInfo = document.getElementById("searched-pokemon-info");
         divSearchPokemonInfo.innerHTML = `
             <h2>${pokemon.name}</h2>
             <p>ID: ${pokemon.id}</p>
             <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}" class="pokemon-image">
             <p>Types: ${pokemon.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
-            <button class="add-to-team">Añadir a equipo</button>` 
+            <button class="add-to-team">Añadir a equipo</button>
+        `;
+
+        // Faig un event listener al botó perque faci una crida a la funció addToTeam
+        const addToTeamButton = divSearchPokemonInfo.querySelector(".add-to-team");
+        addToTeamButton.addEventListener("click", () => addToTeam(pokemon)); 
     });
+    return false;
 }
-async function searchPokemon(pokemonName){
-    const response = await fetch(`${BASE_URL}pokemon/?search=${pokemonName}`);
+
+async function searchPokemon(pokemonName) {
+    const response = await fetch(`${BASE_URL}pokemon/${pokemonName}`);
+    if(!response.ok){
+        alert("Pokemon no existente");
+        return null;
+    }
     const pokemon = await response.json();
-    return pokemon.results[0];
+    return pokemon;
 }
+
+/*function addToTeam(pokemon) {
+    const teamList = document.getElementById("team");
+
+    // Check if the team already has 6 Pokémon
+    if (teamList.children.length >= 6) {
+        alert("El equipo ya tiene 6 Pokémon.");
+        return;
+    }
+
+    // Create the Pokémon details block
+    const pokemonBlock = document.createElement("li");
+    pokemonBlock.innerHTML = `
+        <h2>${pokemon.name}</h2>
+        <p>ID: ${pokemon.id}</p>
+        <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}" class="pokemon-image">
+        <p>Types: ${pokemon.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
+    `;
+
+    // Append the Pokémon details block to the team list
+    teamList.appendChild(pokemonBlock);
+}*/
